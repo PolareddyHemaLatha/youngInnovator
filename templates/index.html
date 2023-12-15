@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Topics</title>
+    <style>
+
+         body {
+
+            background-color: rgba(255, 99, 71, 0.5);
+            margin: 50;
+            padding: 50;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            color:rgb(125, 60, 152);
+            font-size: 20px;
+        }
+
+        .video {
+            width: 30%;
+            margin-bottom: 10px;
+        }
+         label, input, button {
+            font-size: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Trending Topics</h1>
+
+    <!-- Search form -->
+
+    <form action="/scrape" method="post">
+        <label for="search_keyword">Search for:</label>
+        <input type="text" id="search_keyword" name="keyword" required>
+        <button type="submit">Search</button>
+    </form>
+
+
+    <!-- Display existing topics -->
+    <div class="video-container">
+        {% for topic in topics %}
+            <div class="video">
+                <p>{{ topic.title }}</p>
+
+                {% if topic.video_url %}
+                    <video controls>
+                        <source src="{{ topic.video_url }}" type="video/mov">
+
+
+                    </video>
+
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
